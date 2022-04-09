@@ -50,7 +50,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
 
     function returnOption(index) {
         return {
-            loop: true,
+            loop: index != 0 ? true : false,
             autoplay: true,
             animationData: animationList[index],
             rendererSettings: {
@@ -153,14 +153,15 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
         <div className="aniObject">
 
             <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
+                position: "fixed", width: _baseGeo.width * 1.1 + "px",
                 left: (0.0) + "px"
-                , bottom: (_baseGeo.height * -0.6) + "px",
+                , bottom: (_baseGeo.height * -0.8) + "px",
                 pointerEvents: 'none'
             }}>
 
-                <Lottie autoplay loop options={returnOption(0)}
+                <Lottie autoplay options={returnOption(0)}
                     mouseDown={false}
+                    loop={false}
                     speed={0.6}
                     isClickToPauseDisabled={true}
                 />
