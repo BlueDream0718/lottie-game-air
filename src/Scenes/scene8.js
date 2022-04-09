@@ -213,7 +213,7 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                     <Lottie autoplay options={returnOption(0)}
                         mouseDown={false}
                         loop={true}
-                        speed={0.4}
+                        speed={0.25}
                         isClickToPauseDisabled={true}
                     />
                 </div>

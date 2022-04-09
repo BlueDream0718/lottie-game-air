@@ -184,7 +184,9 @@ const App = ({ geo, _setBackground, __controlBacksound, _startTransition,
 
   return (
     <div >
-      {<div className={_isBackloaded ? 'aniObject' : 'hideObject'}>
+      {<div
+      // className={_isBackloaded ? '' : 'hideObject'}
+      >
         <Switch test={index}>
           <Scene1 nextFunc={() => { setFomart(1) }} _baseGeo={baseGeo} _geo={__geo} value={0} />
           <Scene2 nextFunc={nextFunc} _baseGeo={baseGeo} startTransition={_startTransition} _geo={__geo} value={1} />
