@@ -166,21 +166,6 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
     return (
         <div className="aniObject">
 
-
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_baseGeo.height * -0.6) + "px",
-                pointerEvents: 'none'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(0)}
-                    mouseDown={false}
-                    speed={0.6}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
-
             <div
                 ref={girlAniList[0]}
                 style={{

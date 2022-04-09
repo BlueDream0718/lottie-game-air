@@ -129,7 +129,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo }) {
 
                 <Lottie autoplay loop options={returnOption(7)}
                     mouseDown={false}
-                    speed={0.9}
+                    speed={0.45}
                     isClickToPauseDisabled={true}
                 />
             </div>
@@ -146,7 +146,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo }) {
 
                 <Lottie autoplay loop options={returnOption(7)}
                     mouseDown={false}
-                    speed={0.8}
+                    speed={0.4}
                     isClickToPauseDisabled={true}
                 />
             </div>
@@ -161,7 +161,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo }) {
 
                 <Lottie autoplay loop options={returnOption(8)}
                     mouseDown={false}
-                    speed={0.9}
+                    speed={0.45}
                     isClickToPauseDisabled={true}
                 />
             </div>

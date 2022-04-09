@@ -3,6 +3,8 @@ import { useContext, useEffect, useRef } from "react";
 import BaseImage from "../components/BaseImage"
 import { UserContext } from "../components/BaseShot";
 import { returnAudioPath, playEnvirAni, pauseEnvirAni } from "../components/CommonFunctions";
+import Lottie from "react-lottie-segments";
+import loadAnimation from '../utils/loadAnimation'
 
 let stepCount = 0;
 let prefix = 'interactive/SB39_Interactive_Icon_'
@@ -11,6 +13,13 @@ let aniNum = 0
 let turnList = [
     0, 1, 3, 2, 6, 4, 5, 7
 ]
+
+const animationList = []
+
+new loadAnimation('last/bubble_1.json').then(result => {
+    animationList[0] = result;
+}, () => { });
+
 export default function Scene3({ nextFunc, _geo, _baseGeo }) {
 
     const audioList = useContext(UserContext)
@@ -24,6 +33,17 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
     ]
     const soundList = [10, 11, 12, 13, 14, 15, 16, 17]
 
+    function returnOption(index) {
+        return {
+            loop: true,
+            autoplay: true,
+            animationData: animationList[index],
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        };
+    }
+
     useEffect(() => {
 
         audioList.bodyAudio1.src = returnAudioPath(soundList[0])
@@ -33,10 +53,6 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
             playCart()
             aniNum = playEnvirAni(showingImgList[1], 250)
         }, 1000);
-
-        setTimeout(() => {
-            bubbleAniRef.current.className = 'bubbleUpDown'
-        }, 2000);
 
 
 
@@ -186,62 +202,6 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                     url={"Prop interactive/SB_31_CI_Blue Circle.svg"}
                 />
                 <div
-                    ref={bubbleAniRef}
-
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        left: '0%',
-                        top: '0%',
-                        transform: 'translateY(100%)'
-                    }}
-                >
-                    < BaseImage
-                        scale={0.33}
-                        posInfo={{
-                            l: 0.2, t: 0.5
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.23}
-                        posInfo={{
-                            l: 0.25, t: 0.4
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.2}
-                        posInfo={{
-                            l: 0.2, t: 0.3
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.3}
-                        posInfo={{
-                            l: 0.4, t: 0.3
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.2}
-                        posInfo={{
-                            l: 0.4, t: 0.3
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.25}
-                        posInfo={{
-                            l: 0.5, t: 0.6
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                </div>
-                <div
-                    className='bubbleUpDown'
                     style={{
                         position: 'absolute',
                         width: '100%',
@@ -250,47 +210,11 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                         top: '0%',
                     }}
                 >
-                    < BaseImage
-                        scale={0.33}
-                        posInfo={{
-                            l: 0.3, t: 0.45
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.2}
-                        posInfo={{
-                            l: 0.4, t: 0.4
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.2}
-                        posInfo={{
-                            l: 0.24, t: 0.3
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.2}
-                        posInfo={{
-                            l: 0.4, t: 0.7
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.22}
-                        posInfo={{
-                            l: 0.4, t: 0.6
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
-                    />
-                    < BaseImage
-                        scale={0.25}
-                        posInfo={{
-                            l: 0.5, t: 0.6
-                        }}
-                        url={"bubbles/sb_51_sea_bg_bubble1.svg"}
+                    <Lottie autoplay options={returnOption(0)}
+                        mouseDown={false}
+                        loop={true}
+                        speed={0.4}
+                        isClickToPauseDisabled={true}
                     />
                 </div>
             </div>
