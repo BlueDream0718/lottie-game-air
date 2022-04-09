@@ -134,7 +134,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
 
                 }, audioList.bodyAudio1.duration * 1000);
 
-            }, 5000);
+            }, 3500);
 
             return () => {
                 timerList.map(timer => {
@@ -162,7 +162,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
                 <Lottie autoplay options={returnOption(0)}
                     mouseDown={false}
                     loop={false}
-                    speed={0.6}
+                    speed={0.4}
                     isClickToPauseDisabled={true}
                 />
             </div>
