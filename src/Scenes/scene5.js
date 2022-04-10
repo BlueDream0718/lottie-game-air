@@ -5,6 +5,7 @@ import BaseImage from "../components/BaseImage"
 import "../stylesheets/styles.css";
 import { UserContext } from '../components/BaseShot';
 import { playEnvirAni, pauseEnvirAni, returnAudioPath } from "../components/CommonFunctions"
+import Leaves from "./leaves"
 
 const animationList = []
 
@@ -148,52 +149,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo }) {
 
             </div>
 
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.01) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(7)}
-                    mouseDown={false}
-                    speed={0.55}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
-
-
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.2) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none',
-                transform: 'rotate(10deg)'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(7)}
-                    mouseDown={false}
-                    speed={0.4}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.2) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none',
-                transform: 'rotate(5deg)'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(8)}
-                    mouseDown={false}
-                    speed={0.42}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
+            <Leaves _baseGeo={_baseGeo} _geo={_geo} />
 
             {/* ---clouds--- */}
 

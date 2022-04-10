@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import Lottie from "react-lottie-segments";
 import loadAnimation from '../utils/loadAnimation'
 import { returnAudioPath } from "../components/CommonFunctions"
 import "../stylesheets/styles.css";
 import { UserContext } from '../components/BaseShot';
+import { Player } from '@lottiefiles/react-lottie-player';
+import { prePathUrl } from '../components/CommonFunctions';
+import Lottie from "react-lottie-segments";
 
 const animationList = []
 
@@ -47,6 +49,10 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
     const girlAniList = [useRef(), useRef()]
 
     const [speakingStop, setSpeakingStop] = useState(false)
+
+    const [leaveNum, setLeaveNum] = useState(0)
+
+    const playerRefList = [useRef(), useRef(), useRef(), useRef()]
 
     function returnOption(index) {
         return {
@@ -136,6 +142,19 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
 
             }, 3500);
 
+            timerList[7] = setTimeout(() => {
+                playerRefList[0].current.play();
+                timerList[8] = setTimeout(() => {
+                    playerRefList[1].current.play();
+                    timerList[9] = setTimeout(() => {
+                        playerRefList[2].current.play();
+                        timerList[10] = setTimeout(() => {
+                            playerRefList[3].current.play();
+                        }, 1500);
+                    }, 1500);
+                }, 1500);
+            }, 1000);
+
             return () => {
                 timerList.map(timer => {
                     clearTimeout(timer)
@@ -155,16 +174,96 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
             <div style={{
                 position: "fixed", width: _baseGeo.width * 1.1 + "px",
                 left: (0.0) + "px"
-                , bottom: (_baseGeo.height * -0.8) + "px",
+                , bottom: (_baseGeo.height * 1) + "px",
+                pointerEvents: 'none',
+            }}>
+
+                <Player
+                    ref={playerRefList[0]}
+                    keepLastFrame={true}
+                    speed={0.4}
+                    src={prePathUrl() + 'lottieFiles/last/feather.json'}
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        left: '0%',
+                        top: '0%',
+                        pointerEvents: 'none',
+                        overflow: 'visible'
+                    }}
+                >
+                </Player>
+            </div>
+
+            <div style={{
+                position: "fixed", width: _baseGeo.width * 1.2 + "px",
+                left: _baseGeo.left + _baseGeo.width * -0.1 + "px"
+                , bottom: (_baseGeo.height * 1.1) + "px",
                 pointerEvents: 'none'
             }}>
 
-                <Lottie autoplay options={returnOption(0)}
-                    mouseDown={false}
-                    loop={false}
-                    speed={0.4}
-                    isClickToPauseDisabled={true}
-                />
+                <Player
+                    ref={playerRefList[1]}
+                    keepLastFrame={true}
+                    speed={0.5}
+                    src={prePathUrl() + 'lottieFiles/last/feather.json'}
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        left: '0%',
+                        top: '0%',
+                        pointerEvents: 'none',
+                        overflow: 'visible'
+                    }}
+                >
+                </Player>
+            </div>
+            <div style={{
+                position: "fixed", width: _baseGeo.width * 1.2 + "px",
+                left: _baseGeo.left + _baseGeo.width * -0.1 + "px"
+                , bottom: (_baseGeo.height * 1.2) + "px",
+                pointerEvents: 'none'
+            }}>
+
+                <Player
+                    ref={playerRefList[2]}
+                    keepLastFrame={true}
+                    speed={0.5}
+                    src={prePathUrl() + 'lottieFiles/last/feather.json'}
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        left: '0%',
+                        top: '0%',
+                        pointerEvents: 'none',
+                        overflow: 'visible'
+                    }}
+                >
+                </Player>
+            </div>
+
+            <div style={{
+                position: "fixed", width: _baseGeo.width * 1.2 + "px",
+                left: _baseGeo.left + _baseGeo.width * -0.1 + "px"
+                , bottom: (_baseGeo.height * 0.95) + "px",
+                pointerEvents: 'none'
+            }}>
+
+                <Player
+                    ref={playerRefList[3]}
+                    keepLastFrame={true}
+                    speed={0.5}
+                    src={prePathUrl() + 'lottieFiles/last/feather.json'}
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        left: '0%',
+                        top: '0%',
+                        pointerEvents: 'none',
+                        overflow: 'visible'
+                    }}
+                >
+                </Player>
             </div>
 
 

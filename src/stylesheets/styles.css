@@ -323,6 +323,10 @@
   transition: 0.5s;
 }
 
+.halfOpacity {
+  opacity: 0.4
+}
+
 .movingTopDown {
   animation: movingTopDownAni 4s infinite;
   animation-timing-function: linear;

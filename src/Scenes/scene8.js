@@ -19,7 +19,7 @@ const animationList = []
 new loadAnimation('last/bubble_1.json').then(result => {
     animationList[0] = result;
 }, () => { });
-
+let subInterval
 export default function Scene3({ nextFunc, _geo, _baseGeo }) {
 
     const audioList = useContext(UserContext)
@@ -31,6 +31,7 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
         [useRef(), useRef(), useRef(), useRef()],
         [useRef(), useRef(), useRef(), useRef()]
     ]
+    const subRefList = [useRef(), useRef()]
     const soundList = [10, 11, 12, 13, 14, 15, 16, 17]
 
     function returnOption(index) {
@@ -51,7 +52,9 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
         setTimeout(() => {
 
             playCart()
-            aniNum = playEnvirAni(showingImgList[1], 250)
+            aniNum = playEnvirAni(showingImgList[1], 300)
+
+
         }, 1000);
 
 
@@ -66,6 +69,7 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
     const playCart = () => {
 
         pauseEnvirAni(aniNum)
+        clearInterval(subInterval)
 
         let judgeNum = stepCount % 2;
         let timeDuration = 0;
@@ -80,6 +84,7 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
             nextFunc()
         else {
             if (stepCount > 1) {
+                subRefList[0].current.setClass('hide')
                 showingImgList[judgeNum].map(item => item.current.setClass('hide'))
                 if (stepCount == 5)
                     bgRef.current.setClass('hide')
@@ -98,9 +103,30 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
 
                     if (stepCount == 1)
                         bgRef.current.setClass('show')
+                    if (stepCount == 8)
+                        subRefList[1].current.className = 'show'
 
                     timerList[5] = setTimeout(() => {
-                        aniNum = playEnvirAni(showingImgList[showNum], 250)
+                        aniNum = playEnvirAni(showingImgList[showNum], 300)
+                        if (stepCount == 8) {
+                            let count = 0
+
+                            subInterval = setInterval(() => {
+                                if (count > 2)
+                                    subRefList[1].current.className = 'showObject'
+                                else
+                                    subRefList[1].current.className = 'hideObject'
+                                if (count > 2)
+                                    count = 0
+                                else
+                                    count++
+                            }, 300);
+                        }
+                        else {
+                            subRefList[1].current.className = 'hide'
+
+                        }
+
                     }, 500);
                 }, 500);
             }
@@ -141,15 +167,10 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
             }
 
         }
-
-
-
     }
 
     return (
         <div className="aniObject">
-
-
             <div style={{
                 position: 'absolute', width: _baseGeo.width + 'px', height: _baseGeo.height + 'px',
                 left: _baseGeo.left + 'px', top: _baseGeo.bottom + 'px'
@@ -162,7 +183,8 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
             </div>
             <div
                 style={{
-                    position: "fixed", width: _geo.width * 0.4 + "px"
+                    position: "fixed", width: _geo.width * 0.4 + "px",
+                    height: _geo.width * 0.4 + "px"
                     , left: _geo.left + _geo.width * 0.3 + "px",
                     top: _geo.top + _geo.height * 0.15 + "px",
                 }}>
@@ -185,7 +207,39 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                     )
                 }
 
+                <BaseImage
+                    ref={subRefList[0]}
+                    className={'halfOpacity'}
+                    scale={0.205}
+                    style={{ transform: 'rotate(-5deg)' }}
+                    posInfo={{ l: 0.144, t: 0.164 }}
+                    url={'Animation/Other/SB39_ Icon_Cloud_05.svg'}
+                />
+                <div
+                    ref={subRefList[1]}
+                    className='hideObject'
+                    style={{
+                        position: "absolute", width: "100%",
+                        height: "100%"
+                        , left: 0 + "px",
+                        top: 0 + "px",
+                    }}
+                >
+                    <BaseImage
+                        scale={0.185}
+                        style={{ opacity: 0.8, transform: 'rotate(-5deg)' }}
+                        posInfo={{ l: 0.166, t: 0.264 }}
+                        url={'Animation/Other/SB39_ Icon_Cloud_05.svg'}
+                    />
+                    <BaseImage
+                        scale={0.18}
+                        style={{ opacity: 0.8, transform: 'rotate(-5deg)' }}
+                        posInfo={{ l: 0.724, t: 0.460 }}
+                        url={'Animation/Other/SB39_ Icon_Cloud_05.svg'}
+                    />
+                </div>
             </div>
+
             <div
                 ref={bubbleEffectRef}
                 className='hideObject'
@@ -204,9 +258,10 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                 <div
                     style={{
                         position: 'absolute',
-                        width: '100%',
+                        width: '50%',
                         height: '100%',
-                        left: '0%',
+
+                        left: '20%',
                         top: '0%',
                     }}
                 >

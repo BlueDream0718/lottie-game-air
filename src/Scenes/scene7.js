@@ -6,6 +6,7 @@ import "../stylesheets/styles.css";
 import { UserContext } from '../components/BaseShot';
 import BaseImage from '../components/BaseImage';
 import { returnAudioPath } from '../components/CommonFunctions';
+import Leaves from "./leaves"
 
 const animationList = []
 
@@ -107,63 +108,8 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
         <div className="aniObject">
 
 
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.01) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none'
-            }}>
+            <Leaves _baseGeo={_baseGeo} _geo={_geo} />
 
-                <Lottie autoplay loop options={returnOption(7)}
-                    mouseDown={false}
-                    speed={0.37}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.01) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(8)}
-                    mouseDown={false}
-                    speed={0.4}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.01) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(9)}
-                    mouseDown={false}
-                    speed={0.35}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
-
-            <div style={{
-                position: "fixed", width: _baseGeo.width * 1 + "px",
-                left: (0.0) + "px"
-                , bottom: (_geo.height * -0.01) + "px",
-                overflow: 'hidden',
-                pointerEvents: 'none'
-            }}>
-
-                <Lottie autoplay loop options={returnOption(10)}
-                    mouseDown={false}
-                    speed={0.45}
-                    isClickToPauseDisabled={true}
-                />
-            </div>
 
             <div
                 style={{
