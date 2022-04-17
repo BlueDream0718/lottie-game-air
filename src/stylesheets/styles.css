@@ -770,3 +770,21 @@ img {
     opacity: 1;
   }
 }
+
+
+.featherAni {
+  animation: featherAniFrame 3s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes featherAniFrame {
+
+  0% {
+    transform: translateY(0%) rotate(0deg);
+  }
+
+
+  100% {
+    transform: translateY(-400%) rotate(120deg);
+  }
+}

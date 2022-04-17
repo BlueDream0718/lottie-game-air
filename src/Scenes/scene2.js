@@ -14,7 +14,7 @@ new loadAnimation('last/feather.json').then(result => {
 }, () => { });
 
 
-new loadAnimation('main/gi.json').then(result => {
+new loadAnimation('recent/Girl_front_pose.json').then(result => {
     animationList[1] = result;
 }, () => { });
 
@@ -23,7 +23,7 @@ new loadAnimation('recent/SB39_Girl_pose.json').then(result => {
     animationList[2] = result;
 }, () => { });
 
-new loadAnimation('main/Sc05boy .json').then(result => {
+new loadAnimation('recent/boy_front_pose.json').then(result => {
     animationList[3] = result;
 }, () => { });
 
@@ -271,15 +271,16 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
             <div
                 ref={girlAniList[0]}
                 style={{
-                    position: "fixed", width: _geo.width * 0.9 + "px",
+                    position: "fixed", width: _geo.width * 0.55 + "px",
                     left: (_geo.width * 0.0 + _geo.left) + "px"
-                    , bottom: (_geo.height * -0.04) + "px",
+                    , bottom: (_geo.height * -0.56) + "px",
                     overflow: 'hidden',
                     pointerEvents: 'none'
                 }}>
 
-                <Lottie autoplay loop options={returnOption(1)}
+                <Lottie loop options={returnOption(1)}
                     mouseDown={false}
+                    isStopped={true}
                     isClickToPauseDisabled={true}
                 />
             </div>
@@ -303,15 +304,16 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
             <div
                 ref={boyAniList[0]}
                 style={{
-                    position: "fixed", width: _geo.width * 0.3 + "px",
-                    left: (_geo.width * 0.6 + _geo.left) + "px"
-                    , bottom: (_geo.height * -0.04) + "px",
+                    position: "fixed", width: _geo.width * 0.4 + "px",
+                    left: (_geo.width * 0.55 + _geo.left) + "px"
+                    , bottom: (_geo.height * -0.65) + "px",
                     overflow: 'hidden',
                     pointerEvents: 'none'
                 }}>
 
-                <Lottie autoplay loop options={returnOption(3)}
+                <Lottie loop options={returnOption(3)}
                     mouseDown={false}
+                    isStopped={true}
                     isClickToPauseDisabled={true}
                 />
             </div>

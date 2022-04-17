@@ -1,5 +1,5 @@
 import "../stylesheets/styles.css";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import BaseImage from "../components/BaseImage"
 import { UserContext } from "../components/BaseShot";
 import { returnAudioPath, playEnvirAni, pauseEnvirAni } from "../components/CommonFunctions";
@@ -33,6 +33,7 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
     ]
     const subRefList = [useRef(), useRef()]
     const soundList = [10, 11, 12, 13, 14, 15, 16, 17]
+    const featherEffect = useRef()
 
     function returnOption(index) {
         return {
@@ -84,18 +85,27 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
             nextFunc()
         else {
             if (stepCount > 1) {
+                bubbleEffectRef.current.className = 'hide'
                 subRefList[0].current.setClass('hide')
                 showingImgList[judgeNum].map(item => item.current.setClass('hide'))
                 if (stepCount == 5)
                     bgRef.current.setClass('hide')
-                if (stepCount == 6)
+                if (stepCount == 6) {
                     bubbleEffectRef.current.className = 'hide'
+                }
+                if (stepCount == 7) {
+                    featherEffect.current.className = 'hide'
+                }
 
 
-                timerList[4] = setTimeout(() => {
-                    if (stepCount == 5)
+                timerList[12] = setTimeout(() => {
+                    if (stepCount == 5) {
                         bubbleEffectRef.current.className = 'show'
-                }, 400);
+                    }
+                    if (stepCount == 6) {
+                        featherEffect.current.className = 'show'
+                    }
+                }, 300);
                 timerList[0] = setTimeout(() => {
 
 
@@ -260,7 +270,6 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                         position: 'absolute',
                         width: '50%',
                         height: '100%',
-
                         left: '20%',
                         top: '0%',
                     }}
@@ -272,8 +281,30 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                         isClickToPauseDisabled={true}
                     />
                 </div>
-            </div>
 
+            </div>
+            <div
+                ref={featherEffect}
+                className='hideObject'
+                style={{
+                    position: "fixed", width: _geo.width * 0.319 + "px",
+                    height: _geo.width * 0.319 + "px"
+                    , left: _geo.left + _geo.width * 0.34 + "px",
+                    top: _geo.top + _geo.height * 0.194 + "px",
+                    borderRadius: '50%',
+                    overflow: 'hidden'
+                }}>
+                < BaseImage
+                    style={{ transform: 'scale(1.25) translateY(1.6%)' }}
+                    url={"Prop interactive/SB_31_CI_Blue Circle.svg"}
+                />
+                < BaseImage
+                    className={'featherAni'}
+                    scale={0.35}
+                    posInfo={{ l: 0.3, t: 1 }}
+                    url={"Prop interactive/feather.svg"}
+                />
+            </div>
         </div>
     );
 }
