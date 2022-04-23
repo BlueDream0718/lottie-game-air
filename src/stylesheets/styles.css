@@ -780,11 +780,11 @@ img {
 @keyframes featherAniFrame {
 
   0% {
-    transform: translateY(0%) rotate(0deg);
+    transform: translateY(-400%) rotate(0deg);
   }
 
 
   100% {
-    transform: translateY(-400%) rotate(120deg);
+    transform: translateY(200%) rotate(180deg);
   }
 }

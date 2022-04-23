@@ -90,12 +90,16 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                 showingImgList[judgeNum].map(item => item.current.setClass('hide'))
                 if (stepCount == 5)
                     bgRef.current.setClass('hide')
-                if (stepCount == 6) {
-                    bubbleEffectRef.current.className = 'hide'
-                }
-                if (stepCount == 7) {
-                    featherEffect.current.className = 'hide'
-                }
+
+                setTimeout(() => {
+                    if (stepCount == 6) {
+                        bubbleEffectRef.current.className = 'hide'
+                    }
+                    if (stepCount == 7) {
+                        featherEffect.current.className = 'hide'
+                    }
+                }, 200);
+
 
 
                 timerList[12] = setTimeout(() => {
