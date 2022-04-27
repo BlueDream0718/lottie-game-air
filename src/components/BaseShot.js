@@ -80,9 +80,6 @@ var isGameStarted = true;
 
 let backgroundSize = { width: 0, height: 0, left: 0, bottom: 0, right: 0, top: 0 }
 
-
-
-
 const UserContext = createContext();
 let isGameLoaded = false;
 
@@ -91,7 +88,6 @@ let isGameLoaded = false;
 
 export default function BaseShot() {
 
-    console.log('shoing..')
     // const standardRate = 1920 / 969;
     // const backRate = 1600 / 900;
     const standardRate = 1600 / 900;

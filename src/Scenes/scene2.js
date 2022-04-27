@@ -106,33 +106,35 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
 
                             timerList[3] = setTimeout(() => {
 
-                                setSpeakingStop(true)
+                                audioList.bodyAudio3.play();
 
-                                girlAniList[0].current.className = 'showObject'
-                                girlAniList[1].current.className = 'hideObject'
+                                // setSpeakingStop(true)
 
-                                timerList[10] = setTimeout(() => {
-                                    // girlAniList[1].current.style.transform = 'translateX(' + _geo.width * -0.2 + 'px)'
+                                // girlAniList[0].current.className = 'showObject'
+                                // girlAniList[1].current.className = 'hideObject'
 
-                                    // girlAniList[1].current.style.transition = '0.5s'
-                                    boyAniList[0].current.className = 'hideObject'
-                                    boyAniList[1].current.className = 'showObject'
+                                // timerList[10] = setTimeout(() => {
+                                // girlAniList[1].current.style.transform = 'translateX(' + _geo.width * -0.2 + 'px)'
 
-                                    setSpeakingStop(false)
-                                    audioList.bodyAudio3.play();
+                                // girlAniList[1].current.style.transition = '0.5s'
+                                // boyAniList[0].current.className = 'hideObject'
+                                // boyAniList[1].current.className = 'showObject'
 
-                                    timerList[4] = setTimeout(() => {
-                                        setSpeakingStop(true)
-                                        timerList[5] = setTimeout(() => {
-                                            startTransition(2);
+                                // setSpeakingStop(false)
+                                // audioList.bodyAudio3.play();
 
-                                            timerList[6] = setTimeout(() => {
-                                                nextFunc()
-                                                audioList.wooAudio.play()
-                                            }, 300);
-                                        }, 1000);
-                                    }, audioList.bodyAudio3.duration * 1000 + 500);
-                                }, 300);
+                                timerList[4] = setTimeout(() => {
+                                    setSpeakingStop(true)
+                                    timerList[5] = setTimeout(() => {
+                                        startTransition(2);
+
+                                        timerList[6] = setTimeout(() => {
+                                            nextFunc()
+                                            audioList.wooAudio.play()
+                                        }, 300);
+                                    }, 300);
+                                }, audioList.bodyAudio3.duration * 1000 + 500);
+                                // }, 300);
                             }, audioList.bodyAudio2.duration * 1000);
                         }, 300);
 
@@ -140,7 +142,7 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
 
                 }, audioList.bodyAudio1.duration * 1000);
 
-            }, 3500);
+            }, 2000);
 
             timerList[7] = setTimeout(() => {
                 playerRefList[0].current.play();

@@ -173,24 +173,25 @@ export default function BaseScene({ nextFunc, _geo, setSuccessNum }) {
 
 
 
-                {[0, 1, 2, 3].map((value, index) =>
-                    < BaseImage
-                        ref={correctList[index]}
-                        scale={0.93}
-                        key={index}
-                        posInfo={{ l: 0.035, t: 0.065 }}
-                        url={"interactive/SB39_Interactive_Icon_11_F" + (index + 1) + ".svg"}
-                        geo={_geo}
-                        className={index != 0 ? 'hideObject' : ''}
-                        onLoad={index == 0 ? loading : null}
-                    />
-                )
+                {
+                    Array.from(Array(6).keys()).map((value, index) =>
+                        < BaseImage
+                            ref={correctList[index]}
+                            scale={0.93}
+                            key={index}
+                            posInfo={{ l: 0.035, t: 0.065 }}
+                            url={"circles/SB39_Interactive_Icon_13/SB39_Interactive_Icon_13_F" + (index > 8 ? '' : '0') + (index + 1) + ".svg"}
+                            geo={_geo}
+                            className={value > 0 ? 'hideObject' : ''}
+                            onLoad={index == 0 ? loading : null}
+                        />
+                    )
                 }
                 <BaseImage
                     url={"Icons/SB39_Interactive-Icon_SB39_Interactive_Icon_Green_Highlight.svg"}
                     geo={_geo}
-                    scale={0.93}
-                    posInfo={{ l: 0.035, t: 0.055 }}
+                    scale={0.95}
+                    posInfo={{ l: 0.025, t: 0.04 }}
                     ref={greenGlow}
                     className='hideObject'
                     style={{ transition: '0.7s' }}
@@ -220,8 +221,8 @@ export default function BaseScene({ nextFunc, _geo, setSuccessNum }) {
                 <BaseImage
                     url={"Icons/SB39_Interactive-Icon_SB39_Interactive_Icon_Red_Highlight.svg"}
                     geo={_geo}
-                    scale={0.93}
-                    posInfo={{ l: 0.035, t: 0.07 }}
+                    scale={0.91}
+                    posInfo={{ l: 0.045, t: 0.07 }}
                     ref={redGlow}
                     className='hideObject'
                     style={{ transition: '0.7s' }}

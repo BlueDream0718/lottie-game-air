@@ -160,11 +160,13 @@ export function startRepeatAudio(pastTime = 3000, intervalTime = 7000) {
 
 export function stopRepeatAudio() {
 
-    repeatAudio.pause();
-    repeatAudio.currentTime = 0;
+    if (repeatAudio) {
+        repeatAudio.pause();
+        repeatAudio.currentTime = 0;
 
-    clearTimeout(repeartTimer)
-    clearInterval(repeatInterval)
+        clearTimeout(repeartTimer)
+        clearInterval(repeatInterval)
+    }
 
 }
 

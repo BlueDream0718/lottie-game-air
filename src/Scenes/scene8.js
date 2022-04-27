@@ -7,7 +7,7 @@ import Lottie from "react-lottie-segments";
 import loadAnimation from '../utils/loadAnimation'
 
 let stepCount = 0;
-let prefix = 'interactive/SB39_Interactive_Icon_'
+let prefix = 'SB39_Interactive_Icon_0'
 let timerList = []
 let aniNum = 0
 let turnList = [
@@ -16,48 +16,38 @@ let turnList = [
 
 const animationList = []
 
-new loadAnimation('last/bubble_1.json').then(result => {
-    animationList[0] = result;
-}, () => { });
 let subInterval
 export default function Scene3({ nextFunc, _geo, _baseGeo }) {
 
     const audioList = useContext(UserContext)
 
     const bgRef = useRef()
-    const bubbleAniRef = useRef()
-    const bubbleEffectRef = useRef();
     const showingImgList = [
-        [useRef(), useRef(), useRef(), useRef()],
-        [useRef(), useRef(), useRef(), useRef()]
+        Array.from({ length: 20 }, ref => useRef()),
+        Array.from({ length: 20 }, ref => useRef())
     ]
     const subRefList = [useRef(), useRef()]
     const soundList = [10, 11, 12, 13, 14, 15, 16, 17]
-    const featherEffect = useRef()
-
-    function returnOption(index) {
-        return {
-            loop: true,
-            autoplay: true,
-            animationData: animationList[index],
-            rendererSettings: {
-                preserveAspectRatio: "xMidYMid slice"
-            }
-        };
-    }
+    const imgCountList = [
+        9, 8, 13, 9, 14, 9, 20, 8
+    ]
 
     useEffect(() => {
+
+        Array.from(Array(imgCountList[0]).keys()).map((value, index) =>
+            showingImgList[1][index].current.setUrl(
+                'circles/' + prefix + '1/' + prefix + '1_F0' + (value + 1) + ".svg"))
+
+        Array.from(Array(imgCountList[1]).keys()).map((value, index) =>
+            showingImgList[0][index].current.setUrl(
+                'circles/' + prefix + '2/' + prefix + '2_F0' + (value + 1) + ".svg"))
 
         audioList.bodyAudio1.src = returnAudioPath(soundList[0])
 
         setTimeout(() => {
-
             playCart()
-            aniNum = playEnvirAni(showingImgList[1], 300)
-
-
+            aniNum = playEnvirAni(showingImgList[1].slice(0, imgCountList[0] - 1), 300)
         }, 1000);
-
 
 
         return () => {
@@ -85,61 +75,36 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
             nextFunc()
         else {
             if (stepCount > 1) {
-                bubbleEffectRef.current.className = 'hide'
                 subRefList[0].current.setClass('hide')
-                showingImgList[judgeNum].map(item => item.current.setClass('hide'))
+                showingImgList[judgeNum].map((item, index) => {
+                    if (item.current)
+                        item.current.setClass('hide')
+                })
+
                 if (stepCount == 5)
                     bgRef.current.setClass('hide')
 
-                setTimeout(() => {
-                    if (stepCount == 6) {
-                        bubbleEffectRef.current.className = 'hide'
-                    }
-                    if (stepCount == 7) {
-                        featherEffect.current.className = 'hide'
-                    }
-                }, 200);
-
-
-
-                timerList[12] = setTimeout(() => {
-                    if (stepCount == 5) {
-                        bubbleEffectRef.current.className = 'show'
-                    }
-                    if (stepCount == 6) {
-                        featherEffect.current.className = 'show'
-                    }
-                }, 300);
                 timerList[0] = setTimeout(() => {
-
 
                     showingImgList[showNum][0].current.setClass('show')
 
                     if (stepCount == 1)
                         bgRef.current.setClass('show')
-                    if (stepCount == 8)
-                        subRefList[1].current.className = 'show'
+
 
                     timerList[5] = setTimeout(() => {
-                        aniNum = playEnvirAni(showingImgList[showNum], 300)
+                        aniNum = playEnvirAni(showingImgList[showNum].slice(0, imgCountList[stepCount - 1] - 1), 300)
                         if (stepCount == 8) {
                             let count = 0
-
                             subInterval = setInterval(() => {
-                                if (count > 2)
-                                    subRefList[1].current.className = 'showObject'
-                                else
-                                    subRefList[1].current.className = 'hideObject'
+
                                 if (count > 2)
                                     count = 0
                                 else
                                     count++
                             }, 300);
                         }
-                        else {
-                            subRefList[1].current.className = 'hide'
 
-                        }
 
                     }, 500);
                 }, 500);
@@ -160,18 +125,23 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                 timerList[2] = setTimeout(() => {
                     playCart();
                 }, timeDuration + 2000);
-
             }, 1300);
 
-
-
             if (stepCount < 8) {
-
                 if (stepCount > 1)
                     timerList[3] = setTimeout(() => {
-                        showingImgList[judgeNum].map((item, index) => item.current.setUrl(
-                            prefix + (turnList[stepCount] > 9 ? '' : '0') + (turnList[stepCount] + 1) + '_F' + (index + 1) + ".svg"))
+                        Array.from(Array(imgCountList[stepCount]).keys()).map((index) => {
+                            showingImgList[judgeNum][index].current.setUrl(
+                                'circles/' + prefix + (stepCount + 1) + '/' + prefix + (stepCount + 1) +
+                                (index > 8 ? '_F' : '_F0') + (index + 1) + ".svg")
+                            console.log('circles/' + prefix + (stepCount + 1) + '/' + prefix + (stepCount + 1) +
+                                (index > 8 ? '_F' : '_F0') + (index + 1) + ".svg")
+                        }
+                        )
+
                     }, 1000);
+
+
 
                 if (judgeNum == 0)
                     audioList.bodyAudio2.src = returnAudioPath(soundList[stepCount])
@@ -203,19 +173,18 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                     top: _geo.top + _geo.height * 0.15 + "px",
                 }}>
                 {
-                    [0, 1, 2, 3].map(value =>
-                        < BaseImage
-                            ref={showingImgList[1][value]}
-                            url={prefix + '01_F' + (value + 1) + ".svg"}
-                            className={value > 0 ? 'hideObject' : ''}
-                        />
-                    )
+                    Array.from(Array(20).keys()).map
+                        (value =>
+                            < BaseImage
+                                ref={showingImgList[1][value]}
+                                className={value > 0 ? 'hideObject' : ''}
+                            />
+                        )
                 }
                 {
-                    [0, 1, 2, 3].map(value =>
+                    Array.from(Array(20).keys()).map(value =>
                         <BaseImage
                             ref={showingImgList[0][value]}
-                            url={prefix + '02_F' + (value + 1) + ".svg"}
                             className='hideObject'
                         />
                     )
@@ -224,90 +193,12 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                 <BaseImage
                     ref={subRefList[0]}
                     className={'halfOpacity'}
-                    scale={0.205}
+                    scale={0.19}
                     style={{ transform: 'rotate(-5deg)' }}
-                    posInfo={{ l: 0.144, t: 0.164 }}
+                    posInfo={{ l: 0.18, t: 0.158 }}
                     url={'Animation/Other/SB39_ Icon_Cloud_05.svg'}
                 />
-                <div
-                    ref={subRefList[1]}
-                    className='hideObject'
-                    style={{
-                        position: "absolute", width: "100%",
-                        height: "100%"
-                        , left: 0 + "px",
-                        top: 0 + "px",
-                    }}
-                >
-                    <BaseImage
-                        scale={0.185}
-                        style={{ opacity: 0.8, transform: 'rotate(-5deg)' }}
-                        posInfo={{ l: 0.166, t: 0.264 }}
-                        url={'Animation/Other/SB39_ Icon_Cloud_05.svg'}
-                    />
-                    <BaseImage
-                        scale={0.18}
-                        style={{ opacity: 0.8, transform: 'rotate(-5deg)' }}
-                        posInfo={{ l: 0.724, t: 0.460 }}
-                        url={'Animation/Other/SB39_ Icon_Cloud_05.svg'}
-                    />
-                </div>
-            </div>
 
-            <div
-                ref={bubbleEffectRef}
-                className='hideObject'
-                style={{
-                    position: "fixed", width: _geo.width * 0.319 + "px",
-                    height: _geo.width * 0.319 + "px"
-                    , left: _geo.left + _geo.width * 0.34 + "px",
-                    top: _geo.top + _geo.height * 0.194 + "px",
-                    borderRadius: '50%',
-                    overflow: 'hidden'
-                }}>
-                < BaseImage
-                    style={{ transform: 'scale(1.25) translateY(1.6%)' }}
-                    url={"Prop interactive/SB_31_CI_Blue Circle.svg"}
-                />
-                <div
-                    style={{
-                        position: 'absolute',
-                        width: '50%',
-                        height: '100%',
-                        left: '20%',
-                        top: '0%',
-                    }}
-                >
-                    <Lottie autoplay options={returnOption(0)}
-                        mouseDown={false}
-                        loop={true}
-                        speed={0.25}
-                        isClickToPauseDisabled={true}
-                    />
-                </div>
-
-            </div>
-            <div
-                ref={featherEffect}
-                className='hideObject'
-                style={{
-                    position: "fixed", width: _geo.width * 0.319 + "px",
-                    height: _geo.width * 0.319 + "px"
-                    , left: _geo.left + _geo.width * 0.34 + "px",
-                    top: _geo.top + _geo.height * 0.194 + "px",
-                    borderRadius: '50%',
-                    overflow: 'hidden'
-                }}>
-                < BaseImage
-                    style={{ transform: 'scale(1.25) translateY(1.6%)' }}
-                    url={"Prop interactive/SB_31_CI_Blue Circle.svg"}
-                />
-                < BaseImage
-                    className={'featherAni'}
-                    scale={0.35}
-                    posInfo={{ l: 0.3, t: 1 }}
-                    url={"Prop interactive/feather.svg"}
-                />
             </div>
         </div>
     );
