@@ -29,7 +29,11 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
     const subRefList = [useRef(), useRef()]
     const soundList = [10, 11, 12, 13, 14, 15, 16, 17]
     const imgCountList = [
-        9, 8, 13, 9, 14, 9, 20, 8
+        9, 8, 9, 13, 20, 14, 9, 8
+    ]
+
+    const indexList = [
+        1, 2, 4, 3, 7, 5, 6, 8
     ]
 
     useEffect(() => {
@@ -132,9 +136,9 @@ export default function Scene3({ nextFunc, _geo, _baseGeo }) {
                     timerList[3] = setTimeout(() => {
                         Array.from(Array(imgCountList[stepCount]).keys()).map((index) => {
                             showingImgList[judgeNum][index].current.setUrl(
-                                'circles/' + prefix + (stepCount + 1) + '/' + prefix + (stepCount + 1) +
+                                'circles/' + prefix + indexList[stepCount] + '/' + prefix + indexList[stepCount] +
                                 (index > 8 ? '_F' : '_F0') + (index + 1) + ".svg")
-                            console.log('circles/' + prefix + (stepCount + 1) + '/' + prefix + (stepCount + 1) +
+                            console.log('circles/' + prefix + indexList[stepCount] + '/' + prefix + indexList[stepCount] +
                                 (index > 8 ? '_F' : '_F0') + (index + 1) + ".svg")
                         }
                         )

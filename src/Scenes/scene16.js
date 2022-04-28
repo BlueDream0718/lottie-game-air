@@ -18,7 +18,7 @@ new loadAnimation('recent/Girl_front_pose.json').then(result => {
 }, () => { });
 
 
-new loadAnimation('recent/SB39_Girl_pose.json').then(result => {
+new loadAnimation('recent/Girl_front_pose.json').then(result => {
     animationList[2] = result;
 }, () => { });
 
@@ -27,7 +27,7 @@ new loadAnimation('recent/boy_front_pose.json').then(result => {
 }, () => { });
 
 
-new loadAnimation('recent/SB39_Boy_pose.json').then(result => {
+new loadAnimation('recent/boy_front_pose.json').then(result => {
     animationList[4] = result;
 }, () => { });
 

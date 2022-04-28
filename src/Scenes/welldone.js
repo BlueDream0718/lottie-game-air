@@ -44,8 +44,6 @@ export default function Scene18({ nextFunc, _geo }) {
 
     useEffect(() => {
 
-
-
         audioList.bodyAudio1.src = returnAudioPath('23');
         audioList.bodyAudio2.src = returnAudioPath('22');
 
@@ -54,19 +52,22 @@ export default function Scene18({ nextFunc, _geo }) {
             audioList.bodyAudio2.volume = 0.5
         }
 
+        timerList[0] = setTimeout(() => {
+            audioList.clapAudio.play();
+        }, 1000);
+
         timerList[1] = setTimeout(() => {
             audioList.bodyAudio1.play();
             setTimeout(() => {
                 audioList.bodyAudio2.play();
-            }, audioList.bodyAudio1.duration * 1000 + 500);
-        }, 1000);
+            }, audioList.bodyAudio1.duration * 1000);
+        }, 2000);
 
         timerList[2] = setTimeout(() => {
-            audioList.clapAudio.play();
             audioList.yeahAudio.play();
-        }, 4000);
+        }, 5000);
 
-        timerList[0] = setTimeout(() => {
+        timerList[3] = setTimeout(() => {
             nextFunc();
         }, 9000);
 
@@ -77,11 +78,12 @@ export default function Scene18({ nextFunc, _geo }) {
             audioList.clapAudio.currentTime = 0;
             audioList.yeahAudio.currentTime = 0;
 
-            audioList.bodyAudio1.volume = 1
-            audioList.bodyAudio2.volume = 1
-
             audioList.bodyAudio1.pause();
             audioList.bodyAudio2.pause();
+
+
+            audioList.bodyAudio1.volume = 1
+            audioList.bodyAudio2.volume = 1
 
             for (let i = 0; i < timerList.length; i++)
                 clearTimeout(timerList[i])

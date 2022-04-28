@@ -19,7 +19,7 @@ new loadAnimation('recent/Girl_front_pose.json').then(result => {
 }, () => { });
 
 
-new loadAnimation('recent/SB39_Girl_pose.json').then(result => {
+new loadAnimation('recent/Girl_front_pose.json').then(result => {
     animationList[2] = result;
 }, () => { });
 
@@ -28,7 +28,7 @@ new loadAnimation('recent/boy_front_pose.json').then(result => {
 }, () => { });
 
 
-new loadAnimation('recent/SB39_Boy_pose.json').then(result => {
+new loadAnimation('recent/boy_front_pose.json').then(result => {
     animationList[4] = result;
 }, () => { });
 
@@ -38,7 +38,6 @@ loadAnimation('main/feather01.json').then(result => {
 loadAnimation('main/feather02.json').then(result => {
     animationList[6] = result;
 }, () => { });
-
 
 let timerList = []
 export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
@@ -323,9 +322,9 @@ export default function Scene2({ nextFunc, _geo, _baseGeo, startTransition }) {
             <div
                 ref={boyAniList[1]}
                 style={{
-                    position: "fixed", width: _geo.width * 0.64 + "px",
-                    left: (_geo.width * 0.39 + _geo.left) + "px"
-                    , bottom: (_geo.height * -0.62) + "px",
+                    position: "fixed", width: _geo.width * 0.4 + "px",
+                    left: (_geo.width * 0.55 + _geo.left) + "px"
+                    , bottom: (_geo.height * -0.65) + "px",
                     overflow: 'hidden',
                     pointerEvents: 'none'
                 }}>
